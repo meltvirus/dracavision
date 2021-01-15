@@ -8,6 +8,8 @@ public class SQLDatabaseConnection {
     public static String combinatie;
     public static boolean accountbestaat = false;
     //public static String sqlvariabele;
+    public static boolean werknemer = false;
+    public static boolean masteracc = false;
     public static void dracadbinlog(String sqlvariabele) throws SQLException {
         Connection myConn = null;
         Statement myStmt = null;
@@ -21,12 +23,16 @@ public class SQLDatabaseConnection {
             myStmt = myConn.createStatement();
 
             // 3. Execute SQL query
-            myRs = myStmt.executeQuery("select email, wachtwoord from klant where email = \"" + sqlvariabele + "\"");
+            myRs = myStmt.executeQuery("select email, wachtwoord, masteracc, werknemer from klant where email = \"" + sqlvariabele + "\"");
 
             // 4. Process the result set
             while (myRs.next()) {
                 //System.out.println(myRs.getString("email") + ", " + myRs.getString("wachtwoord"));
                 combinatie = /*myRs.getString("email") + ", " + */myRs.getString("wachtwoord");
+                masteracc = myRs.getBoolean("masteracc");
+                werknemer = myRs.getBoolean("werknemer");
+
+
 
             }
         } catch (Exception exc) {

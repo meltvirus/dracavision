@@ -16,7 +16,7 @@ public class bestellingmenu {
     private JComboBox comboBox2;
     private JComboBox comboBox3;
     private JComboBox comboBox4;
-    private JButton homebutton;
+    private JButton terugbutton1;
     private JPanel bestellingpane2;
 
 
@@ -76,7 +76,7 @@ public class bestellingmenu {
 
             }
         });
-        homebutton.addActionListener(new ActionListener() {
+        terugbutton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 inlogmenu.naarhoofdmenu();

@@ -9,6 +9,8 @@ import static menu.inlogmenu.*;
 
 public class hoofdmenu {
     public static boolean ismaster;
+    public static boolean iswerknemer;
+
 
     private JPanel hoofdmenupanel;
     private JLabel uwnummerlabel;
@@ -18,6 +20,7 @@ public class hoofdmenu {
     private JButton instellingenbutton;
     private JButton kluisopenenbutton2;
     private JButton meldingenbutton;
+    private JButton werknemerbutton;
 
 
     public hoofdmenu() {
@@ -46,12 +49,20 @@ public class hoofdmenu {
         });
 
         if (ismaster == true){
+            iswerknemer = true;
             mastermenubutton.setVisible(true);
 
 
 
         } else {
             mastermenubutton.setVisible(false);
+        }
+
+        if (iswerknemer == true){
+            werknemerbutton.setVisible(true);
+
+        } else {
+            werknemerbutton.setVisible(false);
         }
 
 

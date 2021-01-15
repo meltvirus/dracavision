@@ -12,7 +12,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static menu.SQLDatabaseConnection.combinatie;
+import static menu.SQLDatabaseConnection.*;
 
 public class inlogmenu {
     public static JFrame frame = new JFrame("DRACA Vision");
@@ -131,7 +131,7 @@ public class inlogmenu {
                 }
 
 
-                if (wachtwoord.equals(combinatie)) {
+                if (wachtwoord.equals(combinatie) && SQLDatabaseConnection.masteracc == false && SQLDatabaseConnection.werknemer == false) {
                     hoofdmenu.ismaster = false;
                     inlogjuist = true;
                     inlogpoingen();
@@ -149,7 +149,7 @@ public class inlogmenu {
 
 
                 } else {
-                    if (wachtwoord.equals("master")) {
+                    if (wachtwoord.equals(combinatie) && masteracc==true) {
                         hoofdmenu.ismaster = true;
                         inlogjuist = true;
                         inlogpoingen();
@@ -163,9 +163,20 @@ public class inlogmenu {
 
 
                     } else {
-                        hoofdmenu.ismaster = false;
-                        inlogjuist = false;
-                        inlogpoingen();
+                        if (wachtwoord.equals(combinatie) && werknemer==true) {
+                            hoofdmenu.iswerknemer = true;
+                            inlogjuist = true;
+                            inlogpoingen();
+                            hoofdmenu hoofdmenu = new hoofdmenu();
+                            frame.setContentPane(hoofdmenu.getHoofdmenupanel());
+                            frame.repaint();
+                            frame.revalidate();
+                        } else {
+                            hoofdmenu.ismaster = false;
+                            hoofdmenu.iswerknemer = false;
+                            inlogjuist = false;
+                            inlogpoingen();
+                        }
 
 
 
