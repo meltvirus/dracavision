@@ -90,6 +90,12 @@ public class hoofdmenu {
                 inlogmenu.naarbestellingmenu();
             }
         });
+        werknemerbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inlogmenu.naarwerknemer();
+            }
+        });
     }
 
 

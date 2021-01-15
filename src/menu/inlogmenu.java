@@ -1,9 +1,10 @@
 package menu;
 
+import com.sun.source.doctree.AttributeTree;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -64,7 +65,7 @@ public class inlogmenu {
         panel1.add(label4, new com.intellij.uiDesigner.core.GridConstraints(8, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(-1, 40), new Dimension(-1, 400), null, 0, false));
         a12345PasswordField = new JPasswordField();
         a12345PasswordField.setBackground(new Color(-1644826));
-        a12345PasswordField.setText("12345");
+        a12345PasswordField.setText("wachtwoord ");
         panel1.add(a12345PasswordField, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(390, 40), new Dimension(-1, 40), 0, false));
         final JLabel label5 = new JLabel();
         label5.setText("");
@@ -116,9 +117,95 @@ public class inlogmenu {
         inlogmenu.add(passwordField1);
         */
 
+
+
+       /* eMailTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                eMailTextField.setText("");
+
+            }
+        });*/
+        eMailTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (eMailTextField.getText().equals("E-mail"))
+
+                eMailTextField.setText("");
+            }
+        });
+        a12345PasswordField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (a12345PasswordField.getText().equals("wachtwoord "))
+
+                a12345PasswordField.setText("");
+            }
+        });
+
+        eMailTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (eMailTextField.getText().equals("")) {
+                    eMailTextField.setText("E-mail");
+                }
+            }
+        });
+
+        a12345PasswordField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (a12345PasswordField.getText().equals("")) {
+                    a12345PasswordField.setText("wachtwoord ");
+                }
+            }
+        });
+
+        a12345PasswordField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                    inlogknop();
+
+                }
+            }
+        });
+
+        eMailTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                    inlogknop();
+
+                }
+            }
+        });
+
+        logInButton.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                    inlogknop();
+
+                }
+            }
+        });
+
+
+
+
         logInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent a) {
+                inlogknop();
+                /* test, naar methode inlogknop veranderd
                 wachtwoord = a12345PasswordField.getText();
                 wachtwoord2 = a12345PasswordField.getText();
                 emailadres = eMailTextField.getText();
@@ -141,11 +228,6 @@ public class inlogmenu {
                     frame.setContentPane(hoofdmenu.getHoofdmenupanel());
                     frame.repaint();
                     frame.revalidate();
-
-                    /*bestellingmenu bestellingmenu = new bestellingmenu();
-                    frame.setContentPane(bestellingmenu.getBestellingpane());
-                    frame.repaint();
-                    frame.revalidate();*/
 
 
                 } else {
@@ -187,7 +269,7 @@ public class inlogmenu {
                     }
                 }
 
-            }
+            */}
         });
         //account maken button
         button1.addActionListener(new ActionListener() {
@@ -210,6 +292,17 @@ public class inlogmenu {
 
 
 
+            }
+        });
+
+        button1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                    naaraccountaanmaak();
+
+                }
             }
         });
     }
@@ -305,6 +398,14 @@ frame.setResizable(false);
 
     }
 
+    public static void naarwerknemer(){
+        frame.getContentPane().removeAll();
+        frame.setContentPane(new werknemermenu().getWerknemerpanel());
+        frame.repaint();
+        frame.revalidate();
+
+    }
+
     public static void naaraccountaanmaak(){
         frame.getContentPane().removeAll();
         frame.setContentPane(new menu.accountaanmaak().getAccountpanel());
@@ -344,6 +445,76 @@ frame.setResizable(false);
 
         } catch (java.io.IOException e){
             System.out.println(e);
+        }
+    }
+
+    public void inlogknop(){
+        wachtwoord = a12345PasswordField.getText();
+        wachtwoord2 = a12345PasswordField.getText();
+        emailadres = eMailTextField.getText();
+
+        try {
+            //new SQLDatabaseConnection();
+            SQLDatabaseConnection.dracadbinlog(eMailTextField.getText());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        if (wachtwoord.equals(combinatie) && SQLDatabaseConnection.masteracc == false && SQLDatabaseConnection.werknemer == false) {
+            hoofdmenu.ismaster = false;
+            inlogjuist = true;
+            inlogpoingen();
+
+
+            hoofdmenu hoofdmenu = new hoofdmenu();
+            frame.setContentPane(hoofdmenu.getHoofdmenupanel());
+            frame.repaint();
+            frame.revalidate();
+
+                    /*bestellingmenu bestellingmenu = new bestellingmenu();
+                    frame.setContentPane(bestellingmenu.getBestellingpane());
+                    frame.repaint();
+                    frame.revalidate();*/
+
+
+        } else {
+            if (wachtwoord.equals(combinatie) && masteracc==true) {
+                hoofdmenu.ismaster = true;
+                inlogjuist = true;
+                inlogpoingen();
+                hoofdmenu hoofdmenu = new hoofdmenu();
+                frame.setContentPane(hoofdmenu.getHoofdmenupanel());
+                frame.repaint();
+                frame.revalidate();
+
+
+
+
+
+            } else {
+                if (wachtwoord.equals(combinatie) && werknemer==true) {
+                    hoofdmenu.iswerknemer = true;
+                    inlogjuist = true;
+                    inlogpoingen();
+                    hoofdmenu hoofdmenu = new hoofdmenu();
+                    frame.setContentPane(hoofdmenu.getHoofdmenupanel());
+                    frame.repaint();
+                    frame.revalidate();
+                } else {
+                    hoofdmenu.ismaster = false;
+                    hoofdmenu.iswerknemer = false;
+                    inlogjuist = false;
+                    inlogpoingen();
+                }
+
+
+
+
+
+                //System.out.println("Onjuiste inlogpoing");
+                wachtwoordstatus.setText("Incorrecte inloggegevens");
+            }
         }
     }
 

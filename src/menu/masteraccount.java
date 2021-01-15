@@ -12,6 +12,9 @@ public class masteraccount {
     private JButton openkluis;
     private JComboBox comboBox4;
     private JButton terugbutton1;
+    private Object kluisnummertje;
+    private static String kluisnr;
+    private static int kluisnrint;
 
 
     //return getnaarhoofdmenu()
@@ -36,6 +39,33 @@ public class masteraccount {
             @Override
             public void actionPerformed(ActionEvent e) {
                 inlogmenu.naarhoofdmenu();
+            }
+        });
+        openkluis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                kluisnummertje = comboBox4.getSelectedItem();
+
+                kluisnr = (String) kluisnummertje;
+                if (!kluisnummertje.equals("")) {
+                    kluisnrint = Integer.parseInt(kluisnr);
+                }
+
+                switch (kluisnrint){
+                    case 1:
+                        System.out.println("open hier kluis 1 met microbit");
+                        break;
+                    case 2:
+                        System.out.println("open hier kluis 2");
+                        break;
+                    case 3:
+                        System.out.println("open hier kluis 3");
+                        break;
+                    case 4:
+                        System.out.println("open hier kluis 4");
+                        break;
+                    default:
+                }
             }
         });
     }

@@ -29,7 +29,7 @@ public class meldingen {
         });
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         frame.setContentPane(new meldingen().meldingenpanel);
         frame.setSize(504,896);
@@ -39,7 +39,7 @@ public class meldingen {
 
 
 
-    }
+    }*/
     /*public static void naarhoofdmenu() {
         frame.getContentPane().removeAll();
         frame.setContentPane(new meldingen().meldingenpanel);
