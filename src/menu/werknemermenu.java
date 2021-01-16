@@ -15,16 +15,20 @@ public class werknemermenu {
     private JComboBox comboBox4;
     public JComboBox bestellingcombobox;
     private JButton laadbestellingen;
+    private JLabel foutmelding;
     public Object kluisnummertje;
     public Object bestelnummer;
     public static String bestelnr;
     public static String kluisnr;
     public static int bestelint;
     public static int kluisnrint;
+    public static String melding;
 
 
 
     public werknemermenu() {
+        melding = "";
+        foutmelding.setText(melding);
 
         if (instellingen.darkmode == true){
             werknemerpanel.setBackground(new Color(0x24242B));
@@ -53,7 +57,10 @@ public class werknemermenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 kluisnummertje = comboBox4.getSelectedItem();
-                bestelnummer = bestellingcombobox.getSelectedItem();
+                bestelnummer = "";
+                if (bestelnummer != null) {
+                    bestelnummer = bestellingcombobox.getSelectedItem();
+                }
 
                     if (!kluisnummertje.equals("") && !bestelnummer.equals("")) {
                         if (!bestelnummer.equals("")) {
@@ -70,12 +77,18 @@ public class werknemermenu {
                             if (SQLDatabaseConnection.isalinkluis == false) {
                                 inlogmenu.naarhoofdmenu();
                             }
+                            melding ="";
                         } else {
-                            System.out.println("vul beide in");
+                            //System.out.println("vul beiden in");
+                            melding = "Vul beiden in.";
+
                         }
                     } else {
-                    System.out.println("vul beide in");
+                        melding = "Vul beiden in.";
+
+                    System.out.println("vul beiden in");
                 }
+                    foutmelding.setText(melding);
 
                     /*switch (kluisnrint){
                         case 1:
@@ -106,6 +119,7 @@ public class werknemermenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 bestellingcombobox.removeAllItems();
+                bestellingcombobox.addItem("");
                 try {
                     SQLDatabaseConnection.bestellingconnectie();
                 } catch (SQLException throwables) {

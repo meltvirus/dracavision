@@ -19,8 +19,10 @@ public class bestellingmenu {
     private JComboBox comboBox4;
     private JButton terugbutton1;
     private JPanel bestellingpane2;
+    private JLabel foutmelding;
     public static int product1;
     public static int product2;
+    public static String melding;
 
 
     {
@@ -33,6 +35,8 @@ public class bestellingmenu {
 
 
     public bestellingmenu() {
+        melding = "";
+        foutmelding.setText(melding);
 
         if (instellingen.darkmode == true){
             bestellingpane2.setBackground(new Color(0x24242B));
@@ -103,9 +107,13 @@ public class bestellingmenu {
 
                         inlogmenu.naarhoofdmenu();
                     } else {
-                        System.out.println("Al bestelling onderweg!!! maak hier een pop up van"); //!!!!
+                        //System.out.println("Al bestelling onderweg!!! maak hier een pop up van"); //!!!!
+                        melding = "Al een bestelling in behandeling.";
                     }
+                } else {
+                    melding = "Selecteer minimaal 1 product.";
                 }
+                foutmelding.setText(melding);
 
             }
         });

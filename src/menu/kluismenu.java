@@ -14,9 +14,11 @@ public class kluismenu {
     private JButton openkluis;
     public JLabel kluisstatus;
     private JButton homebutton;
+    public JLabel foutmelding;
 
 
     public kluismenu() {
+        foutmelding.setText("");
 
 
 
@@ -35,13 +37,14 @@ public class kluismenu {
         openkluis.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Open kluis");
+                //System.out.println("Open kluis");
                 //kluisstatus.setText("Kluis geopend!");
                 try {
                     SQLDatabaseConnection.openkluis(SQLDatabaseConnection.klantnummer);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+                foutmelding.setText(SQLDatabaseConnection.foutmeldingtekst);
                 // HIER DE MICROBIT CODE (SWITCH STATEMENT LIJKT ME HANDIG)
                 // (INT)
 

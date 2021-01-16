@@ -21,6 +21,7 @@ public class SQLDatabaseConnection {
     public static int openbestellingen;
     public static int bestelnr;
     public static boolean albestellingonderweg;
+    public static String foutmeldingtekst;
 
     public static void dracadbinlog(String sqlvariabele) throws SQLException {
         klantnummer = 0;
@@ -314,7 +315,7 @@ public class SQLDatabaseConnection {
 
             } else {
                 hoofdmenu.getal = "Nog niets";
-                System.out.println("Er is nog geen bestelling gereed of geplaatst.");
+                //System.out.println("Er is nog geen bestelling gereed of geplaatst.");
             }
 
 
@@ -360,9 +361,12 @@ public class SQLDatabaseConnection {
 
                 myStmt.executeUpdate("update bestelling set geleverd = 1, inkluis = 0 where bestelnummer = \"" + bestelnr + "\"");
 
+                foutmeldingtekst = "De kluis is geopend";
+
 
             } else {
-                System.out.println("Er is nog geen bestelling gereed of geplaatst.");
+                //System.out.println("Er is nog geen bestelling gereed of geplaatst.");
+                foutmeldingtekst = "Er is nog geen bestelling gereed";
             }
 
 
