@@ -56,17 +56,23 @@ public class werknemermenu {
                 bestelnummer = bestellingcombobox.getSelectedItem();
 
                     if (!kluisnummertje.equals("") && !bestelnummer.equals("")) {
-                        getKluisnummertje();
-                        bestelnr = (String) bestelnummer;
-                        kluisnrint = Integer.parseInt(kluisnr);
-                        bestelint = Integer.parseInt(bestelnr);
+                        if (!bestelnummer.equals("")) {
+                            getKluisnummertje();
+                            bestelnr = (String) bestelnummer;
+                            kluisnrint = Integer.parseInt(kluisnr);
+                            bestelint = Integer.parseInt(bestelnr);
 
-                        try {
-                            SQLDatabaseConnection.verstuurkluisnr(kluisnrint, bestelint);
-                        } catch (SQLException throwables) {
-                            throwables.printStackTrace();
+                            try {
+                                SQLDatabaseConnection.verstuurkluisnr(kluisnrint, bestelint);
+                            } catch (SQLException throwables) {
+                                throwables.printStackTrace();
+                            }
+                            if (SQLDatabaseConnection.isalinkluis == false) {
+                                inlogmenu.naarhoofdmenu();
+                            }
+                        } else {
+                            System.out.println("vul beide in");
                         }
-                        inlogmenu.naarhoofdmenu();
                     } else {
                     System.out.println("vul beide in");
                 }

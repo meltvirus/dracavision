@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class bestellingmenu {
     public JPanel bestellingpane;
@@ -18,6 +19,8 @@ public class bestellingmenu {
     private JComboBox comboBox4;
     private JButton terugbutton1;
     private JPanel bestellingpane2;
+    public static int product1;
+    public static int product2;
 
 
     {
@@ -46,25 +49,25 @@ public class bestellingmenu {
 
 
 
-        comboBox1.addItem("");
+        comboBox1.addItem("0");
         comboBox1.addItem("1");
         comboBox1.addItem("2");
         comboBox1.addItem("3");
         comboBox1.addItem("4");
 
-        comboBox2.addItem("");
+        comboBox2.addItem("0");
         comboBox2.addItem("1");
         comboBox2.addItem("2");
         comboBox2.addItem("3");
         comboBox2.addItem("4");
 
-        comboBox3.addItem("");
+        comboBox3.addItem("0");
         comboBox3.addItem("1");
         comboBox3.addItem("2");
         comboBox3.addItem("3");
         comboBox3.addItem("4");
 
-        comboBox4.addItem("");
+        comboBox4.addItem("0");
         comboBox4.addItem("1");
         comboBox4.addItem("2");
         comboBox4.addItem("3");
@@ -72,7 +75,37 @@ public class bestellingmenu {
         inWinkelwagenPlaatsenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inlogmenu.kluismenuframe();
+                //geef pop up
+
+             //   bestelnummer = bestellingcombobox.getSelectedItem();
+             //   bestelnr = (String) bestelnummer;
+             //   bestelint = Integer.parseInt(bestelnr);
+
+                product1 = Integer.parseInt((String) comboBox1.getSelectedItem()); //deze manier is korter!!!
+                product2 = Integer.parseInt((String) comboBox2.getSelectedItem());
+                if (product1 != 0 || product2 != 0) {
+
+                    try {
+                        SQLDatabaseConnection.checkbestelling(SQLDatabaseConnection.klantnummer);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    if (SQLDatabaseConnection.albestellingonderweg == false) {
+
+
+                        try {
+                            SQLDatabaseConnection.plaatsbestelling(SQLDatabaseConnection.klantnummer, product1, product2);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+
+
+
+                        inlogmenu.naarhoofdmenu();
+                    } else {
+                        System.out.println("Al bestelling onderweg!!! maak hier een pop up van"); //!!!!
+                    }
+                }
 
             }
         });

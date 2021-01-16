@@ -463,6 +463,7 @@ frame.setResizable(false);
 
         if (wachtwoord.equals(combinatie) && SQLDatabaseConnection.masteracc == false && SQLDatabaseConnection.werknemer == false) {
             hoofdmenu.ismaster = false;
+            hoofdmenu.iswerknemer = false;
             inlogjuist = true;
             inlogpoingen();
 
@@ -481,6 +482,7 @@ frame.setResizable(false);
         } else {
             if (wachtwoord.equals(combinatie) && masteracc==true) {
                 hoofdmenu.ismaster = true;
+                hoofdmenu.iswerknemer = true;
                 inlogjuist = true;
                 inlogpoingen();
                 hoofdmenu hoofdmenu = new hoofdmenu();
@@ -495,6 +497,7 @@ frame.setResizable(false);
             } else {
                 if (wachtwoord.equals(combinatie) && werknemer==true) {
                     hoofdmenu.iswerknemer = true;
+                    hoofdmenu.ismaster = false;
                     inlogjuist = true;
                     inlogpoingen();
                     hoofdmenu hoofdmenu = new hoofdmenu();

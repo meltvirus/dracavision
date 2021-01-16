@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import static menu.inlogmenu.*;
 
@@ -21,6 +22,7 @@ public class hoofdmenu {
     private JButton kluisopenenbutton2;
     private JButton meldingenbutton;
     private JButton werknemerbutton;
+    public static String getal = "...";
 
 
     public hoofdmenu() {
@@ -75,6 +77,12 @@ public class hoofdmenu {
         kluisopenenbutton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    SQLDatabaseConnection.getkluisnummer(SQLDatabaseConnection.klantnummer);
+                    //kluismenu.kluisnummer.setText(getal);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 kluismenuframe();
             }
         });
