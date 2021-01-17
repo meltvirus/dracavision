@@ -250,8 +250,11 @@ public class SQLDatabaseConnection {
         }
     }
 
+    public static int bestelnummer2 = 0;
+
 
     public static void checkbestelling(int klantnr) throws SQLException {
+        bestelnummer2 = 0;
 
         Connection myConn = null;
         Statement myStmt = null;
@@ -267,8 +270,10 @@ public class SQLDatabaseConnection {
             myRs = myStmt.executeQuery("select bestelnummer from bestelling where klantcode = \'" +klantnr +"\' && ( geleverd = 0)");
             if (myRs.next()) {
                 albestellingonderweg = true;
+                bestelnummer2 = myRs.getInt("bestelnummer");
 
             } else {
+                bestelnummer2 = 0;
                 albestellingonderweg = false;
             }
         } catch (Exception exc) {
@@ -384,6 +389,112 @@ public class SQLDatabaseConnection {
             }
         }
     }
+
+    public static int aantalproduct1 = 0;
+    public static int aantalproduct2 = 0;
+    public static boolean isinkluis;
+
+
+    public static void meldingenmenu(int bestelnummertje) throws SQLException {
+
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+
+            // 1. Get a connection to database
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dracabase?allowPublicKeyRetrieval=true&useSSL=false", "dracavision", "dracavision");
+
+            // 2. Create a statement
+            myStmt = myConn.createStatement();
+
+            // 3. Execute SQL query
+
+            myRs = myStmt.executeQuery("SELECT bg.bestelnummer, bl.productcode, bl.aantal, bg.inkluis FROM bestelregel bl join bestelling bg on bg.bestelnummer = bl.bestelnummer where bl.productcode = 1 && bg.bestelnummer = "+bestelnummertje+";");
+
+            // 4. Process the result set
+            //if (myRs.getInt("inkluis") == 1){
+            while (myRs.next()) {
+                aantalproduct1 = myRs.getInt("aantal");
+
+                //openbestellingen = myRs.getInt("bestelnummer");
+            }
+            //} else {
+            //    meldingen.bestelnietinkluis = true;
+            //}
+            myRs = myStmt.executeQuery("SELECT bg.bestelnummer, bl.productcode, bl.aantal, bg.inkluis FROM bestelregel bl join bestelling bg on bg.bestelnummer = bl.bestelnummer where bl.productcode = 2 && bg.bestelnummer = "+bestelnummertje+";");
+
+            // 4. Process the result set
+
+            while (myRs.next()) {
+                aantalproduct2 = myRs.getInt("aantal");
+
+                //openbestellingen = myRs.getInt("bestelnummer");
+            }
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        } finally {
+            if (myRs != null) {
+                myRs.close();
+            }
+
+            if (myStmt != null) {
+                myStmt.close();
+            }
+
+            if (myConn != null) {
+                myConn.close();
+            }
+        }
+    }
+    public static void ispakketinkluis(int bestelnummertje) throws SQLException {
+
+        Connection myConn = null;
+        Statement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+
+            // 1. Get a connection to database
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dracabase?allowPublicKeyRetrieval=true&useSSL=false", "dracavision", "dracavision");
+
+            // 2. Create a statement
+            myStmt = myConn.createStatement();
+
+            // 3. Execute SQL query
+
+            myRs = myStmt.executeQuery("SELECT bestelnummer, inkluis from bestelling where bestelnummer = "+bestelnummertje+";");
+
+            while (myRs.next()) {
+            if (myRs.getInt("inkluis") ==1){
+                meldingen.inkluismeldingtekst = "Het pakket is klaar in de kluis";
+            } else {
+                meldingen.inkluismeldingtekst = "";
+            }
+
+            }
+
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        } finally {
+            if (myRs != null) {
+                myRs.close();
+            }
+
+            if (myStmt != null) {
+                myStmt.close();
+            }
+
+            if (myConn != null) {
+                myConn.close();
+            }
+        }
+    }
+
+
 
 
 
