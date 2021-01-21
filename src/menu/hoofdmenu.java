@@ -22,7 +22,7 @@ public class hoofdmenu {
     private JButton kluisopenenbutton2;
     private JButton meldingenbutton;
     private JButton werknemerbutton;
-    public static String getal = "...";
+    public static String getal = "Nog niets";
 
 
     public hoofdmenu() {
